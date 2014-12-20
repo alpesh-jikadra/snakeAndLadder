@@ -1,4 +1,4 @@
-						Welcome to Snake And Ladder Game
+Welcome to Snake And Ladder Game
 
 Date : 20 Dec 2014
 Developer : Alpesh
@@ -84,7 +84,6 @@ i.e. if 7 snakes then you have to enter all position for 7 snakes
 4). If you are at snake head position then it will move you to down.
 5). If you are at ladder bottom position then it will climb you on top.
 6). If any player choose the quit then you game will be over. And looser will be the Game quitter.
-
 
 
 
