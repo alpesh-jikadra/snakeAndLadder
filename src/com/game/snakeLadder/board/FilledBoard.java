@@ -1,13 +1,7 @@
 package com.game.snakeLadder.board;
 
-import com.game.snakeLadder.die.Die;
-import com.game.snakeLadder.ladder.Ladder;
-import com.game.snakeLadder.player.Player;
-import com.game.snakeLadder.player.PlayerList;
-import com.game.snakeLadder.snake.Snake;
-import com.game.snakeLadder.validator.Validator;
 
-public class FilledBoard {
+public class FilledBoard {/*
 
 	private Ladder ladders = null;
 	private Snake snakes = null;
@@ -15,7 +9,7 @@ public class FilledBoard {
 	private boolean isGameWon = false;
 	private Board board = null;
 
-	private PlayerList players = new PlayerList();
+	private Players players = new Players();
 
 	private Die die = Die.getDie();
 
@@ -273,4 +267,4 @@ public class FilledBoard {
 	public boolean isGameWon(){
 		return this.isGameWon;
 	}
-}
+*/}

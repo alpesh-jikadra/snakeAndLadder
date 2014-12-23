@@ -11,7 +11,7 @@ public class Ladder {
 	
 	private Integer totalLadders=0;
 	
-	private Map<Integer, Integer> ladders = new TreeMap<Integer, Integer>();;
+	private Map<Integer, Integer> ladders = new TreeMap<Integer, Integer>();
 
 	public Ladder(){}
 	

@@ -45,12 +45,12 @@ public class Validator {
 			int ladderBottom, int ladderTop) {
 		return (snakeHead == ladderTop && snakeTail == ladderBottom);
 	}
-	public static boolean isValidBoardFilled(FilledBoard board){
+	/*public static boolean isValidBoardFilled(FilledBoard board){
 		boolean isValid = true;
 		if(!board.getLadders().isAllLadderComplete()){
 			isValid = false;
 			System.out.println("You have entered only "+board.getLadders().getLadders().size() +" Ladder(s), you must enter total "+board.getLadders().getTotalLadders());
 		}
 		return isValid;
-	}
+	}*/
 }

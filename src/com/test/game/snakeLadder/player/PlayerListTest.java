@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.game.snakeLadder.player.Player;
-import com.game.snakeLadder.player.PlayerList;
+import com.game.snakeLadder.player.Players;
 
 
 public class PlayerListTest {
@@ -12,21 +12,21 @@ public class PlayerListTest {
 	
 	@Test
 	public void testAddNewPlayer(){
-		PlayerList list =new PlayerList();
+		Players list =new Players();
 		Player p1 = new Player("A");
 		boolean isAdded = list.addPlayer(p1);
 		Assert.assertTrue("Player is not added", isAdded);
 	}
 	@Test
 	public void testAddNewPlayerWithNull(){
-		PlayerList list =new PlayerList();
+		Players list =new Players();
 		boolean isAdded = list.addPlayer(null);
 		Assert.assertFalse("Player is not added", isAdded);
 	}
 	
 	@Test
 	public void addMultiplePlayer(){
-		PlayerList list =new PlayerList();
+		Players list =new Players();
 		Player p1 = new Player("A");
 		boolean isFirstAdded = list.addPlayer(p1);
 		Player p2 = new Player("B");
@@ -39,7 +39,7 @@ public class PlayerListTest {
 	
 	@Test
 	public void testTotalPlayerAreOver(){
-		PlayerList list =new PlayerList();
+		Players list =new Players();
 		Player p1 = new Player("A");
 		list.addPlayer(p1);
 		Player p2 = new Player("B");
@@ -52,7 +52,7 @@ public class PlayerListTest {
 	
 	@Test
 	public void testTotalPlayerAreNotOver(){
-		PlayerList list =new PlayerList();
+		Players list =new Players();
 		Player p1 = new Player("A");
 		boolean isFirstAdded = list.addPlayer(p1);
 		Player p2 = new Player("B");
@@ -62,7 +62,7 @@ public class PlayerListTest {
 	}
 	@Test
 	public void testCurrentPlayer(){
-		PlayerList list =new PlayerList();
+		Players list =new Players();
 		Player p1 = new Player("A");
 		boolean isFirstAdded = list.addPlayer(p1);
 		Player p2 = new Player("B");
