@@ -109,47 +109,66 @@ public class SnakeAndLadder implements Playable {
 			move(number);
 		}
 	}
+	
+	private void play(int option) {
+		try {
+			switch (option) {
+			case 1: // Throw Die
+				throwDie();
+				currentPlayer = players.getNextPlayer();
+				break;
+			case 2: // Print board
+				board.printBoard();
+				break;
+			case 3: // Print current Player
+				currentPlayer.printDetails();
+				break;
+			case 4: // print snakes
+				snakes.showSnakes();
+				break;
+			case 5: // print ladders
+				ladders.showLadders();
+				break;
+			case 6: // Quit
+				System.out.println(currentPlayer.getName() + " Lose the Game.");
+				currentPlayer = players.getNextPlayer();
+				System.out.println(currentPlayer.getName() + " Won the Game.");
+				System.out.println("Game is Over");
+				isGameWon = true;
+				return;
+			default:
+				System.out.println("Wrong Input tyr again");
+			}
+
+			if (isGameWon()) {
+				System.out.println("Game is won");
+				System.out.println("Game is Over");
+				return;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeResource();
+		}
+	}
+
 	@Override
-	public void play() {
+	public void play(){
 		currentPlayer = players.getNextPlayer();
 		try {
 			while (!isGameWon()) {
 				
 				System.out.println("--------------------");
 				System.out.println(currentPlayer.getName() + " : your turn -->");
-				int input = getNextNumberFromPlayer("\n1 for Throw Die.\n2 for Print Board.\n3 for Current Player.\n4 Show Snakes \n5 Show Ladders \n6 Quit\n Choose your option-->");
-				switch (input) {
-				case 1: // Throw Die
-					throwDie();
-					currentPlayer = players.getNextPlayer();
-					break;
-				case 2: // Print board
-					board.printBoard();
-					break;
-				case 3: // Print current Player
-					currentPlayer.printDetails();
-					break;
-				case 4: //print snakes 
-					snakes.showSnakes();
-					break;
-				case 5: //print ladders
-					ladders.showLadders();
-					break;
-				case 6: // Quit
-					System.out.println(currentPlayer.getName()+" Lose the Game.");
-					currentPlayer = players.getNextPlayer();
-					System.out.println(currentPlayer.getName()+" Won the Game.");
-					System.out.println("Game is Over");
-					return;
-				default:
-					System.out.println("Wrong Input tyr again");
-				}
-				
-				if(isGameWon()){
-					System.out.println("Game is won");
-					System.out.println("Game is Over");
-					break;
-				}
+				int input = getNextNumberFromPlayer("\n" +
+						"1 for Throw Die.\n" +
+						"2 for Print Board.\n" +
+						"3 for Current Player.\n" +
+						"4 Show Snakes \n" +
+						"5 Show Ladders \n" +
+						"6 Quit\n" +
+						"Choose your option-->");
+				play(input);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -157,9 +176,6 @@ public class SnakeAndLadder implements Playable {
 			closeResource();
 		}
 	}
-
-	
-	
 
 	private boolean setUpSnakes() {
 		try{
@@ -349,7 +365,6 @@ public class SnakeAndLadder implements Playable {
 	}
 	public void closeResource(){
 		in.close();
-//		filledBoard = null;
 	}
 	private boolean customGameOption(){
 		String answer = getNextStringFromPlayer("Do you want to customize Game (Y/N) ?");
