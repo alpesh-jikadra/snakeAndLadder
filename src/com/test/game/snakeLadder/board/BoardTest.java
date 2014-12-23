@@ -1,7 +1,7 @@
 package com.test.game.snakeLadder.board;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 import com.game.snakeLadder.board.Board;
@@ -9,47 +9,41 @@ import com.game.snakeLadder.board.Board;
 public class BoardTest {
 
 //ROw test
-	@Test(expected=NullPointerException.class)
+	@Test
 	public void testRowOverFlow(){
-		Board b = Board.createBoard(13, 100);
-		boolean actual = b.isValidRow();
-		assertFalse("Row Overfalow Fail", actual);
+		Board b = Board.createBoard(13, 10);
+		Assert.assertNull("Row Overflow test fail", b);
 	}
 	@Test
 	public void testRowUnderFlow(){
-		Board b = new Board(5, 100);
-		boolean actual = b.isValidRow();
-		assertFalse("Row Underflow Fail",actual);
+		Board b = Board.createBoard(5, 10);
+		Assert.assertNull("Row Underflow test fail", b);
 	}
 	@Test
 	public void testValidRow(){
-		Board b = new Board(12, 100);
-		boolean actual = b.isValidRow();
-		assertTrue("Valid Row Test Fail",actual);
+		Board b = Board.createBoard(12, 10);
+		Assert.assertNotNull("Valid row test fail", b);
 	}
+	
 	//For column Testing
 	@Test
 	public void testColOverFlow(){
-		Board b = new Board(100, 13);
-		boolean actual = b.isValidCol();
-		assertFalse("Col Overfalow Fail", actual);
+		Board b = Board.createBoard(10, 100);
+		Assert.assertNull("Col Overfalow test Fail", b);
 	}
 	@Test
 	public void testColUnderFlow(){
-		Board b = new Board(50, 0);
-		boolean actual = b.isValidCol();
-		assertFalse("Col Underflow Fail",actual);
+		Board b = Board.createBoard(10, 0);
+		Assert.assertNull("Col Underflow test Fail", b);
 	}
 	@Test
 	public void testValidCol(){
-		Board b = new Board(12, 10);
-		boolean actual = b.isValidCol();
-		assertTrue("Valid Col Test Fail",actual);
+		Board b = Board.createBoard(10, 12);
+		Assert.assertNotNull("Valid column test Fail", b);
 	}
 	@Test
 	public void testValidBoard(){
-		Board b = new Board(10,10);
-		boolean actual = b.isValidBoard();
-		assertTrue("Board Validation Fail",actual);
+		Board b = Board.createBoard(10, 12);
+		Assert.assertNotNull("Valid board creation test fail",b);
 	}
 }
