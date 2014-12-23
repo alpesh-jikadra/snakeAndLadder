@@ -9,9 +9,9 @@ import com.game.snakeLadder.board.Board;
 public class BoardTest {
 
 //ROw test
-	@Test
+	@Test(expected=NullPointerException.class)
 	public void testRowOverFlow(){
-		Board b = new Board(13, 100);
+		Board b = Board.createBoard(13, 100);
 		boolean actual = b.isValidRow();
 		assertFalse("Row Overfalow Fail", actual);
 	}
