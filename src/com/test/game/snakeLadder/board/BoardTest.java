@@ -16,7 +16,7 @@ public class BoardTest {
 	}
 	@Test
 	public void testRowUnderFlow(){
-		Board b = Board.createBoard(5, 10);
+		Board b = Board.createBoard(9, 10);
 		Assert.assertNull("Row Underflow test fail", b);
 	}
 	@Test
@@ -28,12 +28,12 @@ public class BoardTest {
 	//For column Testing
 	@Test
 	public void testColOverFlow(){
-		Board b = Board.createBoard(10, 100);
+		Board b = Board.createBoard(10, 13);
 		Assert.assertNull("Col Overfalow test Fail", b);
 	}
 	@Test
 	public void testColUnderFlow(){
-		Board b = Board.createBoard(10, 0);
+		Board b = Board.createBoard(10, 9);
 		Assert.assertNull("Col Underflow test Fail", b);
 	}
 	@Test

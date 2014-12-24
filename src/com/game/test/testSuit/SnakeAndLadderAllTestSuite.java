@@ -4,8 +4,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.test.game.snakeLadder.SnakeAndLadderTest;
 import com.test.game.snakeLadder.board.BoardTest;
-import com.test.game.snakeLadder.board.FilledBoardTest;
 import com.test.game.snakeLadder.die.DieTest;
 import com.test.game.snakeLadder.ladder.LadderTest;
 import com.test.game.snakeLadder.player.PlayerListTest;
@@ -18,7 +18,7 @@ DieTest.class,
 LadderTest.class,
 SnakeTest.class,
 PlayerListTest.class,
-FilledBoardTest.class
+SnakeAndLadderTest.class
 })
 public class SnakeAndLadderAllTestSuite {
 

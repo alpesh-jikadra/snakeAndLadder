@@ -46,7 +46,7 @@ public class Board {
 		return BOARD_SIZE;
 	}
 	public void printBoard() {
-		System.out.println("-------------------------------------------------");
+		System.out.println("\n-------------------------------------------------\n");
 		int j = (row * col) - 1;
 		int s = 0;
 		while (j > 0) {
@@ -63,7 +63,7 @@ public class Board {
 			j = (i - s) - 1;
 			System.err.println();
 		}
-		System.out.println("-------------------------------------------------");
+		System.out.println("\n-------------------------------------------------\n");
 	}
 	public boolean isValidRow(){
 		return (this.row>=10 && this.row<=12);
