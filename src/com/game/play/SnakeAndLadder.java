@@ -14,8 +14,7 @@ import com.game.snakeLadder.validator.Validator;
 public class SnakeAndLadder implements Playable {
 
 	private static final int MIN_TOTAL_PLAYER = 2;
-	
-	private Scanner in = new Scanner(System.in);
+	public Scanner in = new Scanner(System.in);
 	private Ladder ladders = null;
 	private Snake snakes = null;
 	private Die die = Die.getDie();
@@ -60,7 +59,7 @@ public class SnakeAndLadder implements Playable {
 		boolean isValidBoard = false;
 		try {
 			
-			while (true && !exit) {
+			while (!exit && !isValidBoard) {
 				int row = getNextNumberFromPlayer("Enter Row For Board ->");
 				int col = getNextNumberFromPlayer("Enter Columns For Board ->");
 
@@ -81,8 +80,8 @@ public class SnakeAndLadder implements Playable {
 		}
 		return isValidBoard;
 	}
-
-	private boolean addSnakes(int head, int tail) {
+	
+	private boolean addSnakes(Integer head, Integer tail) {
 		if (head == board.getDestinationNumber()) {
 			System.out.println("Snake Head can not be at Destination position");
 			return false;
@@ -106,16 +105,26 @@ public class SnakeAndLadder implements Playable {
 	private void throwDie() {
 		if (!isGameWon()) {
 			int number = die.throwDie();
-			move(number);
+			if(move(number)){
+				
+				checkSnakeMove();
+				
+				checkLadderMove();
+				
+				if (isWinner()) {
+					System.out.println(currentPlayer.getName()
+							+ " You won the game ");
+				}
+			}
+			changePlayer();
 		}
 	}
 	
-	private void play(int option) {
+	private boolean play(Integer option) {
 		try {
 			switch (option) {
 			case 1: // Throw Die
 				throwDie();
-				currentPlayer = players.getNextPlayer();
 				break;
 			case 2: // Print board
 				board.printBoard();
@@ -131,11 +140,11 @@ public class SnakeAndLadder implements Playable {
 				break;
 			case 6: // Quit
 				System.out.println(currentPlayer.getName() + " Lose the Game.");
-				currentPlayer = players.getNextPlayer();
+				changePlayer();
 				System.out.println(currentPlayer.getName() + " Won the Game.");
 				System.out.println("Game is Over");
 				isGameWon = true;
-				return;
+				return isGameWon;
 			default:
 				System.out.println("Wrong Input tyr again");
 			}
@@ -143,18 +152,17 @@ public class SnakeAndLadder implements Playable {
 			if (isGameWon()) {
 				System.out.println("Game is won");
 				System.out.println("Game is Over");
-				return;
+				return isGameWon;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			closeResource();
-		}
+		} 
+		return isGameWon;
 	}
 
 	@Override
 	public void play(){
-		currentPlayer = players.getNextPlayer();
+		changePlayer();
 		try {
 			while (!isGameWon()) {
 				
@@ -187,7 +195,7 @@ public class SnakeAndLadder implements Playable {
 				isNoOfSnakesValid = setTotalSnakes(noOfSnakes);
 				
 				if(isNoOfSnakesValid){
-					while(true && !exit && !snakes.isAllSnakesComplete()){
+					while(!exit && !snakes.isAllSnakesComplete()){
 						int head = getNextNumberFromPlayer("Enter Snake Head Position ->");
 						int tail = getNextNumberFromPlayer("Enter Snake Tail Position ->");
 						boolean isNewSnakeAdded = addSnakes(head, tail);
@@ -221,7 +229,7 @@ public class SnakeAndLadder implements Playable {
 		}
 		return false;
 	}
-	private boolean setTotalSnakes(int noOfSnakes) {
+	private boolean setTotalSnakes(Integer noOfSnakes) {
 		boolean isValid = true;
 		snakes = new Snake();
 		if (!snakes.setNoOfSnakesIfValid(noOfSnakes)) {
@@ -240,7 +248,7 @@ public class SnakeAndLadder implements Playable {
 				isNoOfLaddersValid = setTotalLadder(noOfLadders);
 				
 				if(isNoOfLaddersValid){
-					while(true && !exit && !ladders.isAllLadderComplete()){
+					while(!exit && !ladders.isAllLadderComplete()){
 						int bottom = getNextNumberFromPlayer("Enter Ladder Bottom Position ->");
 						int top = getNextNumberFromPlayer("Enter Ladder Top Position ->");
 						boolean isNewLadderAdded = addLadder(bottom, top);
@@ -284,7 +292,7 @@ public class SnakeAndLadder implements Playable {
 		}
 		return isValid;
 	}
-	private boolean addLadder(int bottom, int top) {
+	private boolean addLadder(Integer bottom, Integer top) {
 		if (bottom == 1) {
 			System.out.println("Ladder can not be set to 1");
 			return false;
@@ -363,11 +371,11 @@ public class SnakeAndLadder implements Playable {
 		}
 		return input;
 	}
-	public void closeResource(){
+	private void closeResource(){
 		in.close();
 	}
 	private boolean customGameOption(){
-		String answer = getNextStringFromPlayer("Do you want to customize Game (Y/N) ?");
+		String answer = getNextStringFromPlayer("Do you want to customize Game (Y/N) ? \n");
 		return ("y".equals(answer));
 	}
 	private boolean setUpDefaultGame(){
@@ -412,22 +420,23 @@ public class SnakeAndLadder implements Playable {
 		return isGameWon;
 	}
 	
-	private void move(int nextMove) {
+	private boolean move(Integer nextMove) {
+		boolean isMoved = false;
 		if (!isWinner()) {
 			System.out.println(currentPlayer.getName() + " You got " + nextMove);
 
 			if (isValidMove(nextMove)) {
 
 				int oldPosition = currentPlayer.getCurrentPosition();
-				changePlayerPosition(nextMove);
+				isMoved = changePlayerPosition(nextMove);
 				printPosition(oldPosition, currentPlayer.getCurrentPosition());
 
-				checkSnakeMove();
+				/*checkSnakeMove();
 				checkLadderMove();
 				if (isWinner()) {
 					System.out.println(currentPlayer.getName()
 							+ " You won the game ");
-				}
+				}*/
 			} else {
 				System.out.println(currentPlayer.getName()
 						+ " Your current Position is "
@@ -435,9 +444,9 @@ public class SnakeAndLadder implements Playable {
 						+ " So this move is not possible");
 			}
 		}
-
+		return isMoved;
 	}
-	public boolean isValidMove(int nextMove) {
+	private boolean isValidMove(Integer nextMove) {
 		return currentPlayer.getCurrentPosition() + nextMove <= board
 				.getDestinationNumber() && nextMove <= die.getMaxMovePosition();
 	}
@@ -446,23 +455,28 @@ public class SnakeAndLadder implements Playable {
 				+ nextMove);
 		return true;
 	}
-	private void checkSnakeMove() {
-
+	private boolean changePlayer(){
+		this.currentPlayer = players.getNextPlayer();
+		return true;
+	}
+	private boolean checkSnakeMove() {
+		boolean isSnakeMoved = false;
 		if (!isWinner() && isPlayerAtSnakeHead()) {
 			int oldPosition = currentPlayer.getCurrentPosition();
 			System.out.println("Oh you are at snake head ["
 					+ currentPlayer.getCurrentPosition() + "->"
 					+ snakes.getSnakeTail(currentPlayer.getCurrentPosition())
 					+ "]");
-			changePlayerPositionIfSnakeHead();
+			isSnakeMoved = changePlayerPositionIfSnakeHead();
 			printPosition(oldPosition, currentPlayer.getCurrentPosition());
 		}
+		return isSnakeMoved;
 	}
-	public boolean isPlayerAtSnakeHead() {
+	private boolean isPlayerAtSnakeHead() {
 		return snakes.isSnakeHead(currentPlayer.getCurrentPosition());
 	}
 
-	public boolean changePlayerPositionIfSnakeHead() {
+	private boolean changePlayerPositionIfSnakeHead() {
 		if (isPlayerAtSnakeHead()) {
 			currentPlayer.setCurrentPosition(snakes.getSnakeTail(currentPlayer
 					.getCurrentPosition()));
@@ -471,24 +485,26 @@ public class SnakeAndLadder implements Playable {
 		return false;
 	}
 
-	private void checkLadderMove() {
+	private boolean checkLadderMove() {
+		boolean isLadderModed = false;
 		if (!isWinner() && isPlayerAtLadderStart()) {
 			int oldPosition = currentPlayer.getCurrentPosition();
 			System.out.println("WOW you are at Ladder Start ["
 					+ currentPlayer.getCurrentPosition() + "->"
 					+ ladders.getLadderTop(currentPlayer.getCurrentPosition())
 					+ "]");
-			changePlayerPositionIfLadderStart();
+			isLadderModed = changePlayerPositionIfLadderStart();
 			printPosition(oldPosition, currentPlayer.getCurrentPosition());
 
 		}
+		return isLadderModed;
 	}
 
-	public boolean isPlayerAtLadderStart() {
+	private boolean isPlayerAtLadderStart() {
 		return ladders.isLadderBottom(currentPlayer.getCurrentPosition());
 	}
 
-	public boolean changePlayerPositionIfLadderStart() {
+	private boolean changePlayerPositionIfLadderStart() {
 		if (isPlayerAtLadderStart()) {
 			currentPlayer.setCurrentPosition(ladders.getLadderTop(currentPlayer
 					.getCurrentPosition()));
@@ -496,7 +512,7 @@ public class SnakeAndLadder implements Playable {
 		}
 		return false;
 	}
-	private void printPosition(int oldPos, int newPos) {
+	private void printPosition(Integer oldPos, Integer newPos) {
 		if (oldPos == 0) {
 			System.out.println(currentPlayer.getName() + " You move to ["
 					+ newPos + "]");
@@ -506,4 +522,22 @@ public class SnakeAndLadder implements Playable {
 					+ "]");
 		}
 	}
+
+	public Ladder getLadders() {
+		return ladders;
+	}
+
+	public Snake getSnakes() {
+		return snakes;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+	
+
+		
+		
+		
+		
 }
