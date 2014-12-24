@@ -522,22 +522,4 @@ public class SnakeAndLadder implements Playable {
 					+ "]");
 		}
 	}
-
-	public Ladder getLadders() {
-		return ladders;
-	}
-
-	public Snake getSnakes() {
-		return snakes;
-	}
-
-	public Board getBoard() {
-		return board;
-	}
-	
-
-		
-		
-		
-		
 }

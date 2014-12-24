@@ -1,5 +1,6 @@
 package com.game.snakeLadder.snake;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -15,10 +16,12 @@ public class Snake {
 	public Snake(){}
 	
 	public boolean setNoOfSnakesIfValid(int noOfSnakes){
-		this.totalSnakes = noOfSnakes;
-		if(!isValidNoOfSnakes()){
-			this.totalSnakes = 0;
-			return false;
+		if(this.totalSnakes==0){
+			this.totalSnakes = noOfSnakes;
+			if (!isValidNoOfSnakes()) {
+				this.totalSnakes = 0;
+				return false;
+			}
 		}
 		return true;
 	}
@@ -66,7 +69,7 @@ public class Snake {
 		return snakes.get(position);
 	}
 	public Map<Integer,Integer> getSnakes(){
-		return this.snakes;
+		return Collections.unmodifiableMap(this.snakes);
 	}
 	
 	public boolean isValidNoOfSnakes(){

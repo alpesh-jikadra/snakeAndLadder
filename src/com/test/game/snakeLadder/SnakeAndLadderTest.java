@@ -11,6 +11,9 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import com.game.play.SnakeAndLadder;
+import com.game.snakeLadder.board.Board;
+import com.game.snakeLadder.ladder.Ladder;
+import com.game.snakeLadder.snake.Snake;
 
 public class SnakeAndLadderTest {
 
@@ -47,7 +50,11 @@ public class SnakeAndLadderTest {
 	public void testSnakeMove() throws Exception{
 		SnakeAndLadder instance = getInstance();
 		
-		Map<Integer, Integer> snakes = instance.getSnakes().getSnakes();
+		Field privateField = SnakeAndLadder.class.getDeclaredField("snakes");
+		privateField.setAccessible(true);
+		Snake snake = (Snake) privateField.get(instance);
+		
+		Map<Integer, Integer> snakes = snake.getSnakes();//instance.getSnakes().getSnakes();
 		
 		Integer snakeHead = snakes.keySet().iterator().next();
 		
@@ -66,7 +73,11 @@ public class SnakeAndLadderTest {
 	public void testLadderMove() throws Exception{
 		SnakeAndLadder instance = getInstance();
 		
-		Map<Integer, Integer> ladders = instance.getLadders().getLadders();
+		Field privateField = SnakeAndLadder.class.getDeclaredField("ladders");
+		privateField.setAccessible(true);
+		Ladder ladder = (Ladder) privateField.get(instance);
+		
+		Map<Integer, Integer> ladders = ladder.getLadders();
 		
 		Integer snakeHead = ladders.keySet().iterator().next();
 		
@@ -87,7 +98,11 @@ public class SnakeAndLadderTest {
 		
 		Class[] types = new Class[] {};
 		
-		boolean isMoved = changePlayerPosition(instance, instance.getBoard().getDestinationNumber());
+		Field privateField = SnakeAndLadder.class.getDeclaredField("board");
+		privateField.setAccessible(true);
+		Board board = (Board) privateField.get(instance);
+		
+		boolean isMoved = changePlayerPosition(instance, board.getDestinationNumber());
 		
 		Assert.assertTrue("Test case fail for moving to winner position",isMoved);
 		
