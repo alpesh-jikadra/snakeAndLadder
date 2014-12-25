@@ -8,7 +8,7 @@ import com.test.game.snakeLadder.SnakeAndLadderTest;
 import com.test.game.snakeLadder.board.BoardTest;
 import com.test.game.snakeLadder.die.DieTest;
 import com.test.game.snakeLadder.ladder.LadderTest;
-import com.test.game.snakeLadder.player.PlayerListTest;
+import com.test.game.snakeLadder.player.PlayersTest;
 import com.test.game.snakeLadder.snake.SnakeTest;
 
 @RunWith(Suite.class)
@@ -17,7 +17,7 @@ BoardTest.class,
 DieTest.class,
 LadderTest.class,
 SnakeTest.class,
-PlayerListTest.class,
+PlayersTest.class,
 SnakeAndLadderTest.class
 })
 public class SnakeAndLadderAllTestSuite {

@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.game.snakeLadder.player.Player;
 import com.game.snakeLadder.player.Players;
 
-public class PlayerListTest {
+public class PlayersTest {
 	@Test
 	public void testAddNewPlayer(){
 		Players list =new Players();
