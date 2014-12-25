@@ -53,15 +53,15 @@ public class Board {
 			s = (j % col);
 			int i = 0;
 			for (i = j; i >= (j - s); i--) {
-				System.err.printf("%4d",board[i]);
+				System.out.printf("%4d",board[i]);
 			}
 			s = i % col;
-			System.err.println();
+			System.out.println();
 			for (int k = i - s; k <= i; k++) {
-				System.err.printf("%4d",board[k]);
+				System.out.printf("%4d",board[k]);
 			}
 			j = (i - s) - 1;
-			System.err.println();
+			System.out.println();
 		}
 		System.out.println("\n-------------------------------------------------\n");
 	}

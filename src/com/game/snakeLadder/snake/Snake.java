@@ -84,11 +84,11 @@ public class Snake {
 	}
 	
 	public void showSnakes(){
-		System.err.print("\n Snakes : ");
+		System.out.print("\n Snakes : ");
 		for(Map.Entry<Integer, Integer> snake : snakes.entrySet()){
-			System.err.print("["+snake.getKey()+"->"+snake.getValue()+"],");
+			System.out.print("["+snake.getKey()+"->"+snake.getValue()+"],");
 		}
-		System.err.println();
+		System.out.println();
 		System.out.println();		
 	}
 }

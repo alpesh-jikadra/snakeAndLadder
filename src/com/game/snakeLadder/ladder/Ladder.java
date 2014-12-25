@@ -1,6 +1,7 @@
 
 package com.game.snakeLadder.ladder;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -69,7 +70,7 @@ public class Ladder {
 	}
 
 	public Map<Integer, Integer> getLadders(){
-		return this.ladders;
+		return Collections.unmodifiableMap(this.ladders);
 	}
 
 	public Integer getTotalLadders() {
@@ -87,11 +88,11 @@ public class Ladder {
 		return Ladder.MAX_LADDERS;
 	}
 	public void showLadders(){
-		System.err.print("\n Ladders : ");
+		System.out.print("\n Ladders : ");
 		for(Map.Entry<Integer, Integer> ladder : ladders.entrySet()){
-			System.err.print("["+ladder.getKey()+"->"+ladder.getValue()+"],");
+			System.out.print("["+ladder.getKey()+"->"+ladder.getValue()+"],");
 		}
-		System.err.println();
+		System.out.println();
 		System.out.println();
 	}
 }

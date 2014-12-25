@@ -26,11 +26,11 @@ public class Player {
 	}
 	
 	public void printDetails(){
-		System.err.println("--------------------------");
-		System.err.println("Player Name : "+this.name);
-		System.err.println("Player Id : "+this.id);
-		System.err.println("Current Position is :"+this.currentPosition);
-		System.err.println("--------------------------");
+		System.out.println("--------------------------");
+		System.out.println("Player Name : "+this.name);
+		System.out.println("Player Id : "+this.id);
+		System.out.println("Current Position is :"+this.currentPosition);
+		System.out.println("--------------------------");
 		System.out.println();
 	}
 
