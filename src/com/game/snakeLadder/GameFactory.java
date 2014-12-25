@@ -16,7 +16,7 @@ public class GameFactory {
 		if(currentGame.isPlayable()){
 			currentGame.play();
 		}else{
-			throw new RuntimeException("Error while getting Game Factory");
+			throw new RuntimeException("Error while creating Game");
 		}
 		return currentGame;
 	}
