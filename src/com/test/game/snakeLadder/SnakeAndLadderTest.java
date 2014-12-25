@@ -1,8 +1,6 @@
 package com.test.game.snakeLadder;
 
 import java.io.ByteArrayInputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -324,20 +322,4 @@ public class SnakeAndLadderTest {
 		privateField.set(instance, str);
 	}
 	
-	@Test
-	public void testUserInput() throws Exception{
-		SnakeAndLadder s = new SnakeAndLadder();
-		/*		StringWriter sw = new StringWriter();
-		PrintWriter pw = new PrintWriter(sw);
-*/
-		Field privateField = SnakeAndLadder.class.getDeclaredField("in");
-		privateField.setAccessible(true);
-		Scanner in = (Scanner) privateField.get(s);
-		
-		String input = "100\n2";
-		
-		privateField.set(s, new Scanner(input));
-		int a = s.testUserInput();
-		System.out.println(a);
-	}
 }
