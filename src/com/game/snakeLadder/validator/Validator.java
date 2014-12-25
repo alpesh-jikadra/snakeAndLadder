@@ -3,7 +3,6 @@ package com.game.snakeLadder.validator;
 import java.util.Map;
 
 import com.game.snakeLadder.board.Board;
-import com.game.snakeLadder.board.FilledBoard;
 import com.game.snakeLadder.ladder.Ladder;
 import com.game.snakeLadder.snake.Snake;
 
